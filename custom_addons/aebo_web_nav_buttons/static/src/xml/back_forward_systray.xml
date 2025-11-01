@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="aebo.NavButtons" owl="1">
+    <div class="o_systray_item o_aebo_nav_buttons" title="Back / Forward">
+      <button class="btn btn-link o_aebo_btn" t-on-click="goBack" title="Back (Alt+←)">
+        <i class="fa fa-arrow-left" role="img" aria-label="Back"/>
+      </button>
+      <button class="btn btn-link o_aebo_btn" t-on-click="goForward" title="Forward (Alt+→)">
+        <i class="fa fa-arrow-right" role="img" aria-label="Forward"/>
+      </button>
+    </div>
+  </t>
+</templates>

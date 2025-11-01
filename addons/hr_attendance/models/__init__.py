@@ -1,0 +1,9 @@
+from . import attendance_break     # <-- BREAK FIRST
+from . import hr_attendance
+from . import hr_attendance_overtime
+from . import hr_employee_base
+from . import hr_employee
+from . import hr_employee_public
+from . import res_company
+from . import res_users
+from . import res_config_settings

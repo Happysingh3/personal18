@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<templates>
+  <t t-name="note_sticky.StickyNoteSystray" owl="1">
+    <div class="o_systray_item" style='align-content:center;' title="Add Sticky Note" t-on-click="openPopup">
+    <img src="/vs_sticky_notes/static/src/img/sticky-notes.png" alt="Sticky Note" style="height: 35px; width: 35px;" />
+    </div>
+
+    <t t-if="notes.showPopup">
+      <div class="modal-backdrop show"/>
+      <div class="modal d-block" tabindex="-1">
+        <div class="modal-dialog">
+          <form class="modal-content" t-on-submit="submitNote">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Sticky Note</h5>
+              <button type="button" class="btn-close" aria-label="Close" t-on-click="closePopup"/>
+            </div>
+
+            <div class="modal-body">
+              <!-- Title -->
+              <div class="mb-2">
+                <input class="form-control" placeholder="Title" t-model="notes.title" required="1"/>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-2">
+                <textarea class="form-control" rows="3" placeholder="Content" t-model="notes.content"/>
+              </div>
+
+              <!-- Color Picker -->
+              <div class="mb-2">
+                <label class="form-label">Pick a color:</label>
+                <input type="color" class="form-control form-control-color" t-model="notes.color"/>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Text Color:</label>
+                <input type="color" class="form-control form-control-color" t-model="notes.text_color"/>
+              </div>
+
+              <!-- Share With Users -->
+<div class="mb-2">
+  <label class="form-label fw-bold mb-1">Share with:</label>
+  <div class="dropdown">
+    <button class="btn btn-light border w-100 text-start dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+      <t t-if="notes.selectedUsers.length">
+        <t t-foreach="notes.selectedUsers" t-as="userId" t-key="userId">
+          <span class="badge bg-secondary me-1">
+            <t t-esc="notes.allUsers.find(u => u.id === userId)?.name"/>
+          </span>
+        </t>
+      </t>
+      <t t-if="!notes.selectedUsers.length">
+        <span class="text-muted">Select Users</span>
+      </t>
+    </button>
+    <ul class="dropdown-menu w-100 px-2" style="max-height: 200px; overflow-y: auto;">
+      <t t-foreach="notes.allUsers" t-as="user" t-key="user.id">
+        <li>
+          <label class="dropdown-item d-flex align-items-center gap-2">
+            <input type="checkbox" class="form-check-input"
+                   t-att-checked="notes.selectedUsers.includes(user.id)"
+                   t-on-change="() => this.toggleUser(user.id)" />
+            <t t-esc="user.name"/>
+          </label>
+        </li>
+      </t>
+    </ul>
+  </div>
+</div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Add</button>
+              <button type="button" class="btn btn-secondary" t-on-click="closePopup">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </t>
+  </t>
+</templates>

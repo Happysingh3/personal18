@@ -1,0 +1,16 @@
+cr80:
+ - W x H = 54mm x 86mm
+ - W x H = 204 px x 325px
+
+top: W x H = 95px x 170px
+
+--------
+CR100:
+
+
+ - W x H = 67mm x 99mm
+ - W x H = 254 px x 375px
+
+top: W x H = 95px x 170px
+
+

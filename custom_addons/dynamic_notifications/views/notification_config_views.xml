@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_notification_config_tree" model="ir.ui.view">
+        <field name="name">notification.config.tree</field>
+        <field name="model">notification.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="model_id"/>
+                <field name="on_create"/>
+                <field name="on_state_change"/>
+                <!-- <field name="notification_type"/> -->
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_notification_config_form" model="ir.ui.view">
+        <field name="name">notification.config.form</field>
+        <field name="model">notification.config</field>
+        <field name="arch" type="xml">
+            <form string="User Notification Configuration">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"
+                                invisible="state != 'draft'" data-hotkey="q"/>
+                    <button name="action_reset_to_draft" string="Reset To Draft" type="object" class="oe_highlight"
+                                invisible="state != 'confirm'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <!-- <label for="name"/> -->
+                        <h1>
+                            <field name="name" 
+                            class="oe_inline" 
+                            placeholder="Title"
+                            readonly="state == 'confirm'"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="model_id" 
+                                options="{'no_create': True, 'no_open': True}"
+                                readonly="state == 'confirm'"
+                            />
+                            <field name="on_create" readonly="state == 'confirm'"/>
+                            <field name="notification_user_ids" 
+                                widget="many2many_tags" 
+                                options="{'no_create': True, 'no_open': True}"
+                                readonly="state == 'confirm'"
+                            />
+                        </group>
+                        <group>
+                            <field name="on_state_change" readonly="state == 'confirm'"/>
+                            <field name="field_id" 
+                                invisible="not on_state_change"
+                                required="on_state_change"
+                                options="{'no_create': True, 'no_open': True}"
+                                readonly="state == 'confirm'"
+                            />
+                            <field name="selection" 
+                                widget="many2many_tags"
+                                invisible="not on_state_change"
+                                required="on_state_change"
+                                options="{'no_create': True, 'no_open': True}"
+                                readonly="state == 'confirm'"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_notification_config" model="ir.actions.act_window">
+        <field name="name">User Notification Config</field>
+        <field name="res_model">notification.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create and configure user notifications for record creation and status changes.
+            </p>
+        </field>
+    </record>
+
+    <menuitem 
+        id="menu_notification_config" 
+        name="Notification Configurations" 
+        parent="base.menu_email"
+        action="action_notification_config" 
+        sequence="24"
+    />
+
+</odoo>

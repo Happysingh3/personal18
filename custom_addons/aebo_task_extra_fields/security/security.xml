@@ -1,0 +1,8 @@
+<odoo>
+  <!-- Users who may see sensitive task fields -->
+  <record id="group_task_sensitive_fields" model="res.groups">
+    <field name="name">Task: See Order/Serial on Tasks</field>
+    <!-- Project category में दिखेगा -->
+    <field name="category_id" ref="base.module_category_project"/>
+  </record>
+</odoo>

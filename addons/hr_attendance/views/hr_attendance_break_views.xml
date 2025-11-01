@@ -1,0 +1,71 @@
+<odoo>
+  <!-- Breaks: LIST view -->
+  <record id="view_hr_attendance_break_list" model="ir.ui.view">
+    <field name="name">hr.attendance.break.list</field>
+    <field name="model">hr.attendance.break</field>
+    <field name="arch" type="xml">
+      <list string="Breaks">
+        <field name="employee_id"/>
+        <field name="attendance_id"/>
+        <field name="check_in"/>
+        <field name="check_out"/>
+        <field name="duration"/>
+        <field name="state"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Breaks: FORM view -->
+  <record id="view_hr_attendance_break_form" model="ir.ui.view">
+    <field name="name">hr.attendance.break.form</field>
+    <field name="model">hr.attendance.break</field>
+    <field name="arch" type="xml">
+      <form string="Break">
+        <sheet>
+          <group>
+            <field name="employee_id" readonly="1"/>
+            <field name="attendance_id" readonly="1"/>
+            <field name="state" readonly="1"/>
+          </group>
+          <group>
+            <field name="check_in"/>
+            <field name="check_out"/>
+            <field name="duration" readonly="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Window action (optional list menu) -->
+  <record id="action_hr_attendance_break" model="ir.actions.act_window">
+    <field name="name">Breaks</field>
+    <field name="res_model">hr.attendance.break</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- Attendance form pe stat button (ye hr_attendance_view.xml me rakhen) -->
+  <record id="view_hr_attendance_form_inherit_break_btn" model="ir.ui.view">
+    <field name="name">hr.attendance.form.break.button</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//form/header" position="inside">
+        <button name="action_open_breaks"
+                type="object"
+                class="oe_stat_button"
+                icon="fa-coffee"
+                string="Breaks">
+          <field name="break_count" widget="statinfo"/>
+        </button>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- Optional: menu -->
+  <!-- <menuitem id="menu_hr_attendance_break_root"
+            name="Breaks"
+            parent="hr_attendance.menu_hr_attendance_root"
+            action="action_hr_attendance_break"
+            sequence="50"/> -->
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_task_kanban_show_extra_fields" model="ir.ui.view">
+    <field name="name">project.task.kanban.show.extra.fields</field>
+    <field name="model">project.task</field>
+    <field name="inherit_id" ref="project.view_task_kanban"/>
+    <field name="arch" type="xml">
+
+      <!-- payload में अपने fields + related flags add करें -->
+      <xpath expr="//kanban/field[@name='subtask_count']" position="after">
+        <field name="order_number"/>
+        <field name="serial_number"/>
+        <field name="client_details"/>
+        <field name="crac_generated"/>
+        <field name="project_id"/>
+        <field name="show_order_on_card_rel" invisible="1"/>
+        <field name="show_serial_on_card_rel" invisible="1"/>
+        <field name="show_client_on_card_rel" invisible="1"/>
+        <field name="show_crac_on_card_rel" invisible="1"/>
+      </xpath>
+
+      <!-- कार्ड के muted सेक्शन में values (अगर allowed + filled) -->
+      <xpath expr="//t[@t-name='card']//div[contains(@class,'text-muted')]" position="inside" >
+       <t groups="aebo_task_extra_fields.group_task_sensitive_fields">
+        <div t-if="record.order_number and record.order_number.raw_value
+                   and record.show_order_on_card_rel and record.show_order_on_card_rel.raw_value"
+             class="o_text_truncate">
+          <span class="text-muted">Order No:</span>
+          <b t-esc="record.order_number.value"/>
+        </div>
+
+        <div t-if="record.serial_number and record.serial_number.raw_value
+                   and record.show_serial_on_card_rel and record.show_serial_on_card_rel.raw_value"
+             class="o_text_truncate">
+          <span class="text-muted">Serial No:</span>
+          <b t-esc="record.serial_number.value"/>
+        </div>
+
+        <div t-if="record.client_details and record.client_details.raw_value
+                   and record.show_client_on_card_rel and record.show_client_on_card_rel.raw_value"
+             class="o_text_truncate">
+          <span class="text-muted">Client:</span>
+          <t t-esc="record.client_details.value"/>
+        </div> 
+
+        <div t-if="record.crac_generated and record.crac_generated.raw_value
+                   and record.show_crac_on_card_rel and record.show_crac_on_card_rel.raw_value"
+             class="o_text_truncate">
+          <span class="text-muted">CRAC:</span>
+          <t t-esc="record.crac_generated.value"/>
+        </div>
+       </t>
+      </xpath>
+    </field>
+  </record>
+</odoo>

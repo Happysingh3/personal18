@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- View for stock picking-->
+
+
+    <record id="view_company_tree" model="ir.ui.view">
+        <field name="name">res.company.list</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_tree"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='child_ids']" position="after">
+                <field name="vitouhr_card_border" widget="boolean_toggle"/>
+                 <field name="vitouhr_date_expired"/>
+                 <field name="vitouhr_is_qrcode" widget="boolean_toggle"/>
+
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='branches']" position="after">
+                <page name="Badge_Setting" string="Badge">
+                    <group>
+                        <group>
+
+                            <field name="vitouhr_date_expired" readonly="1"/>
+                            <field name="vitouhr_card_border" widget="boolean_toggle" readonly="1"/>
+                            <field name="vitouhr_is_qrcode" widget="boolean_toggle" readonly="1"/>
+                            <field name="vitouhr_border_round" readonly="1"/>
+                            <field name="vitouhr_font_color" widget="color" options="{'readonly_mode':'color'}" readonly="1"/>
+                            <field name="vitouhr_font_color_company" widget="color"
+                                   options="{'readonly_mode':'color'}" readonly="1"/>
+<!--                            <field name="vitouhr_is_qrcode_bg" widget="boolean_toggle"/>-->
+
+
+                        </group>
+
+
+                        <group>
+
+                            <field name="vitouhr_bg_top" widget="image"
+                                   options="{'preview_image': 'vitouhr_bg_top','zoom':True,'size':[340,190]}" readonly="1"/>
+                            <field name="vitouhr_bg_bottom" widget="image"
+                                   options="{'preview_image': 'vitouhr_bg_bottom','zoom':True,'size':[340,90]}" readonly="1"/>
+
+                        </group>
+                    </group>
+
+                </page>
+
+
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <!--    <record id="hr_kanban_view_employees" model="ir.ui.view">-->
+    <!--        <field name="name">res.company.kanban</field>-->
+    <!--        <field name="model">hr.employee</field>-->
+    <!--        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>-->
+    <!--        <field name="priority">10</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='user_id']" position="before">-->
+    <!--                <button name="print_badge_portrait" icon="fa-print" string="Portrait"-->
+    <!--                        type="object" class="btn-primary m-1 rounded"/>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='user_id']" position="before">-->
+    <!--                <button name="print_badge_portrait" icon="fa-print" string="Landscape"-->
+    <!--                        type="object" class="btn-primary m-1 rounded"/>-->
+    <!--            </xpath>-->
+
+    <!--        </field>-->
+    <!--    </record>-->
+</odoo>

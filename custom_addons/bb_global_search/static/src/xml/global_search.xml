@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="global_search.GlobalSearchMenu">
+        <Dropdown position="'bottom-end'" state="dropdown">
+            <button>
+                <i class="fa fa-lg fa-search" role="img" aria-label="Search"/>
+            </button>
+            <t t-set-slot="content">
+                <div class="o_cp_searchview w-100 p-2" role="search">
+                    <div class="o_searchview form-control d-flex align-items-center py-1" role="search" aria-autocomplete="list">
+                        <i class="o_searchview_icon oi oi-search me-2" role="img" aria-label="Search..." title="Search..." />
+                        <div class="o_searchview_input_container d-flex flex-grow-1 flex-wrap gap-1">
+                            <input type="text" class="o_searchview_input o_input flex-grow-1 w-auto border-0" accesskey="Q" placeholder="Search..." role="searchbox"  t-ref="searchInput" t-on-input="onSearchInput"/>
+                            <hr/>
+
+                        </div>
+                    </div>
+                    <div class="o-mail-ActivityMenu">
+                                <div t-if="state.search_results.length === 0" class="o-mail-ActivityMenu-empty align-items-center text-muted p-2 opacity-50 d-flex justify-content-center">
+                                    <span>No Search Result Found.</span>
+                                </div>
+                                <t t-foreach="state.search_results" t-as="search_result" t-key="search_result.id">
+                                     <DropdownItem onSelected.bind="()=>this.openRecord(search_result.model,search_result.rec_id)">
+                                         <span name="recordTitle" t-out="search_result.name" /> (<span t-out="search_result.resModel"/>)
+                                     </DropdownItem>
+                                </t>
+                            </div>
+                </div>
+
+            </t>
+        </Dropdown>
+
+    </t>
+</templates>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="aebo_crm_lead_kanban_inherit_closing" model="ir.ui.view">
+    <field name="name">aebo.crm.lead.kanban.inherit.closing</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+    <field name="priority" eval="100"/>
+    <field name="arch" type="xml">
+
+      <!-- Kanban inline edit enable -->
+      <xpath expr="//kanban" position="attributes">
+        <attribute name="editable">bottom</attribute>
+      </xpath>
+
+      <!-- Make fields available in kanban -->
+      <xpath expr="//kanban" position="inside">
+        <field name="closing_value"/>
+        <field name="stage_closing_date"/>
+        <field name="bid_number"/>
+        <field name="so_number"/>
+        <field name="quantity"/>
+        <field name="drone_details"/>
+        <field name="dropdown_field"/>
+        <field name="product_id"/>
+        <field name="tender_closing_date"/>
+        <field name="is_tender_team" invisible="1"/>
+        <field name="date_deadline"/>
+        <field name="create_date"/>
+        <field name="assignee_ids"/>
+        <field name="team_id"/>
+        <field name="stage_id"/>
+        <field name="crac_generated"/>
+        <field name="stage_alert"/>
+      </xpath>
+
+      <!-- TOP overlay + TOP-RIGHT badges (name से overlap नहीं) -->
+      <xpath expr="//t[@t-name='card']" position="inside">
+        <t t-if="record.stage_alert and record.stage_alert.raw_value">
+          <t t-set="__alert" t-value="record.stage_alert.raw_value"/>
+
+          <!-- full card glow -->
+          <div t-if="__alert == 'overdue'" class="aebo-alert aebo-blink-overdue"/>
+          <div t-if="__alert == 'today'"   class="aebo-alert aebo-blink-today"/>
+
+          <!-- badge: top-right, avatar से थोड़ा नीचे -->
+          <div style="position:absolute; top:30px; right:8px; z-index:2; pointer-events:none;">
+            <t t-if="__alert == 'overdue'">
+              <span class="badge" style="background:#264653;color:#fff;">Stage Closing Overdue</span>
+            </t>
+            <t t-if="__alert == 'today'">
+              <span class="badge" style="background:#f47c20;color:#fff;">Stage Closing Today</span>
+            </t>
+          </div>
+        </t>
+      </xpath>
+
+      <!-- नीचे का आपका कार्ड content as-is -->
+      <xpath expr="//t[@t-name='card']/field[@name='tag_ids']" position="after">
+
+        <t t-if="record.create_date and record.create_date.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Created: </span>
+            <t t-esc="record.create_date.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.closing_value and record.closing_value.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Closing Value: </span>
+            <t t-esc="record.closing_value.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.stage_closing_date and record.stage_closing_date.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Stage Closing: </span>
+            <t t-esc="record.stage_closing_date.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.bid_number and record.bid_number.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Bid : </span>
+            <t t-esc="record.bid_number.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.so_number and record.so_number.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">SO : </span>
+            <t t-esc="record.so_number.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.quantity and record.quantity.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Quantity: </span>
+            <t t-esc="record.quantity.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.crac_generated and record.crac_generated.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">CRAC: </span>
+            <t t-esc="record.crac_generated.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.dropdown_field and record.dropdown_field.raw_value == 'product' and record.product_id and record.product_id.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Product: </span>
+            <t t-esc="record.product_id.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.dropdown_field and record.dropdown_field.raw_value == 'custom' and record.drone_details and record.drone_details.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Drone Details: </span>
+            <t t-esc="record.drone_details.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.is_tender_team and record.is_tender_team.raw_value and record.tender_closing_date and record.tender_closing_date.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Tender Closing: </span>
+            <t t-esc="record.tender_closing_date.value"/>
+          </div>
+        </t>
+
+        <t t-if="record.date_deadline and record.date_deadline.raw_value">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <span style="font-weight:600;">Expected Closing: </span>
+            <t t-esc="record.date_deadline.value"/>
+          </div>
+        </t>
+
+        <t t-if="!read_only">
+          <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+            <field name="assignee_ids"
+                   widget="many2many_avatar_user"
+                   options="{'no_create': True, 'no_open': True}"/>
+          </div>
+        </t>
+
+        <t t-else="">
+          <t t-if="record.assignee_ids and record.assignee_ids.raw_value">
+            <div class="o_kanban_record_subtitle" style="margin-top:4px;">
+              <span class="me-1"><i class="fa fa-users"/></span>
+              <t t-foreach="record.assignee_ids.raw_value" t-as="u">
+                <span class="o_avatar o_m2m_avatar">
+                  <img t-att-src="'/web/image/res.users/%s/avatar_128' % u[0]" class="o_m2m_avatar"/>
+                </span>
+              </t>
+            </div>
+          </t>
+        </t>
+
+      </xpath>
+    </field>
+  </record>
+</odoo>

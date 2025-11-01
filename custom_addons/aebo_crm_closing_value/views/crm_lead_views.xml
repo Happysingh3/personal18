@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="aebo_view_crm_lead_form_closing_value" model="ir.ui.view">
+    <field name="name">aebo.crm.lead.form.inherit.closing.value</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+    <field name="priority" eval="100"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//group[@name='opportunity_partner']/label[@for='phone']/following-sibling::div[1]" position="after">
+
+        <label for="aebo_closing_value_field">Closing Value</label>
+        <div class="o_row">
+          <field name="closing_value" id="aebo_closing_value_field" placeholder="Enter closing value"/>
+        </div>
+
+        <label for="aebo_stage_closing_date_field">Stage Closing Date</label>
+        <div class="o_row">
+          <field name="stage_closing_date" id="aebo_stage_closing_date_field" placeholder="Select stage closing date"/>
+        </div>
+
+        <label for="aebo_bid_number_field">Bid Number</label>
+        <div class="o_row">
+          <field name="bid_number" id="aebo_bid_number_field" placeholder="Enter bid number"/>
+        </div>
+        <label for="aebo_so_number_field">SO Number</label>
+        <div class="o_row">
+          <field name="so_number" id="aebo_so_number_field" placeholder="Enter so number"/>
+        </div>
+
+        <label for="aebo_quantity_field">Quantity</label>
+        <div class="o_row">
+          <field name="quantity" id="aebo_quantity_field" placeholder="Enter quantity"/>
+        </div>
+
+        <label for="crac_generated">CRAC Generated</label>
+        <div class="o_row">
+          <field name="crac_generated" id="crac_generated" placeholder="Enter crac generated"/>
+        </div>
+
+        <label for="aebo_dropdown_field">Dropdown Menu</label>
+        <div class="o_row">
+          <field name="dropdown_field" id="aebo_dropdown_field"/>
+        </div>
+
+        <label for="aebo_product_id" invisible="dropdown_field != 'product'">Product</label>
+        <div class="o_row" invisible="dropdown_field != 'product'">
+          <field name="product_id" id="aebo_product_id" required="dropdown_field == 'product'"/>
+        </div>
+
+        <label for="aebo_drone_details_field" invisible="dropdown_field != 'custom'">Drone Details</label>
+        <div class="o_row" invisible="dropdown_field != 'custom'">
+          <field name="drone_details" id="aebo_drone_details_field" placeholder="Enter drone details"
+                 required="dropdown_field == 'custom'"/>
+        </div>
+
+        <!-- Tender Closing Date: only for Tender teams -->
+        <label for="aebo_tender_closing_date_field" invisible="not is_tender_team">Tender Closing Date</label>
+        <div class="o_row" invisible="not is_tender_team">
+          <field name="tender_closing_date" id="aebo_tender_closing_date_field" placeholder="Select tender closing date"/>
+        </div>
+        <label for="aebo_bid_price_field" groups="bid_ra_price.groups_bid_ra_price">Bid Price</label>
+        <div class="o_row" groups="bid_ra_price.groups_bid_ra_price">
+          <field name="bid_price" id="aebo_bid_price_field" placeholder="Enter bid price"/>
+        </div>
+
+        <!-- ⬇️ NEW: RA Price (LAST) -->
+        <label for="aebo_ra_price_field" groups="bid_ra_price.groups_bid_ra_price">RA Price</label>
+        <div class="o_row" groups="bid_ra_price.groups_bid_ra_price">
+          <field name="ra_price" id="aebo_ra_price_field" placeholder="Enter RA price"/>
+        </div>
+        <label for="aebo_price_confirmed_field" groups="price_confirmed.groups_price_confirm">Price Confirmed</label>
+    <div class="o_row" groups="price_confirmed.groups_price_confirm">
+      <field name="price_confirmed" id="aebo_price_confirmed_field" placeholder="Enter price confirmation"/>
+    </div>
+        <label for="assignee_ids"/>
+        <div class="o_row">
+          <field name="assignee_ids"
+                 widget="many2many_tags"
+                 options="{'no_create': True}"/>
+          <button type="object" name="action_assign_to_me"
+        string="Assign to me" class="btn btn-link"
+        invisible="[('assignee_ids','in',[uid])]"/>
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

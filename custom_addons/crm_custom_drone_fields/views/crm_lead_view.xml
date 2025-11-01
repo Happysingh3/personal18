@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_crm_lead_form_custom_drone" model="ir.ui.view">
+        <field name="name">crm.lead.form.custom.drone</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="product_selection"/>
+                <field name="drone_detail">
+                    <visibility>
+                        <field name="product_selection" eval="value == 'custom_drone'"/>
+                    </visibility>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

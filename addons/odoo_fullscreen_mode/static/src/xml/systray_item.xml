@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="odoo_fullscreen_mode.Fullscreen">
+        <button t-if="!state.isFullscreen" class="btn d-flex" t-on-click="toggleFullscreen"><i class="fa fa-expand"/></button>
+        <button t-else="" class="btn d-flex" t-on-click="toggleFullscreen"><i class="fa fa-compress"/></button>
+    </t>
+
+</templates>

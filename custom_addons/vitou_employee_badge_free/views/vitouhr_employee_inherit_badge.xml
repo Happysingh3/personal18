@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="vitouhr_print_employee_badge" inherit_id="hr.print_employee_badge">
+        <xpath expr="//t[@t-foreach='docs']//span[@t-out='employee.job_id.name']" position="after">
+
+<!--            <span>Expired On: </span><span style="font-size: 10pt;" t-out="employee.vitouhr_expired_date" ></span>-->
+
+             <tr><td><span>Expired On: </span><span style="font-size: 10pt;" t-out="employee.vitouhr_date_expired" data-oe-demo="Expired Date"></span></td></tr>
+        </xpath>
+    </template>
+
+
+</odoo>

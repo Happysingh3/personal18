@@ -1,0 +1,46 @@
+/* Navbar ko positioning context banao */
+.o_main_navbar{ position: relative; }
+
+/* 👇 Aebo back/forward buttons: center align in topbar */
+.o_aebo_nav_buttons{
+  position: absolute;
+  left: 50%;
+  top: 6px;                 /* vertical align adjust: 4–8px */
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;                /* 🔥 buttons ke beech zyada space */
+  z-index: 3;               /* navbar background ke upar */
+}
+
+/* white icons + clean hit area */
+.o_aebo_nav_buttons .o_aebo_btn{
+  padding: 2px 6px;
+  border: none;
+  background: transparent;
+  line-height: 1;
+  cursor: pointer;
+}
+.o_aebo_nav_buttons .o_aebo_btn i{
+  color: #fff;              /* 🤍 white */
+  font-size: 18px;          /* thoda bada */
+}
+.o_aebo_nav_buttons .o_aebo_btn:hover i{ opacity: .85; }
+
+/* Systray ke andar render hota hai, lekin hum us slot ko absolute kar rahe */
+.o_main_navbar .o_systray .o_aebo_nav_buttons{ position: absolute; }
+
+/* Responsive fallback: chhote screens par thoda left shift ya hide */
+@media (max-width: 1200px){
+  .o_aebo_nav_buttons{ top: 6px; gap: 10px; }
+}
+@media (max-width: 992px){
+  .o_aebo_nav_buttons{ left: 48%; gap: 8px; }
+}
+@media (max-width: 768px){
+  .o_aebo_nav_buttons{
+    left: 55%;              /* 50% ke badle 55% */
+    transform: translateX(-50%);
+    gap: 8px;
+  }
+}

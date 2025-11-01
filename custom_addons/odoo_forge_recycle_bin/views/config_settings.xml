@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="view_recycle_bin_res_config_settings_inherit" model="ir.ui.view">
+            <field name="name">res.recycle.bin.config.settings.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Recycle Bin Settings" string="Recycle Bin Settings" name="odoo_forge_recycle_bin">
+                        <block title="Recycle Bin Settings" name="recycle_bin_settings">
+                            <setting title="Recycle Bin Settings" help="Set the number of days after which records in the recycle bin will be automatically deleted.">
+                                <field name="recycle_bin_lifecycle" />
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

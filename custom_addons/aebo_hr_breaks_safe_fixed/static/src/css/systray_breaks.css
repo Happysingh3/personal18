@@ -1,0 +1,5 @@
+
+.aebo-breaks-systray .fa-coffee{ font-size:18px; vertical-align:middle; }
+.aebo-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-left:4px; }
+.aebo-dot--on{ background:#28a745; } /* green */
+.aebo-dot--off{ background:#adb5bd; } /* grey */

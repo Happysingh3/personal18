@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* abp_calendar_public_holiday
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e-20240624\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-12 07:20+0000\n"
+"PO-Revision-Date: 2024-07-12 07:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: abp_calendar_public_holiday
+#: model:ir.model.fields,field_description:abp_calendar_public_holiday.field_resource_calendar_leaves__abp_allday
+msgid "All Day"
+msgstr "Toute la journée"
+
+#. module: abp_calendar_public_holiday
+#: model:ir.model,name:abp_calendar_public_holiday.model_calendar_event
+msgid "Calendar Event"
+msgstr "Calendrier de l'événement"
+
+#. module: abp_calendar_public_holiday
+#: model:ir.model.fields,field_description:abp_calendar_public_holiday.field_calendar_event__abp_resource_calendar_leaves
+msgid "Public Holiday"
+msgstr "Jour férié"
+
+#. module: abp_calendar_public_holiday
+#: model:ir.model,name:abp_calendar_public_holiday.model_resource_calendar_leaves
+msgid "Resource Time Off Detail"
+msgstr "Détails des congés des ressources"
+
+#. module: abp_calendar_public_holiday
+#: model:ir.model,name:abp_calendar_public_holiday.model_res_users
+msgid "User"
+msgstr "Utilisateur"

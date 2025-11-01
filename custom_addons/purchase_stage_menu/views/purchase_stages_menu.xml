@@ -1,0 +1,17 @@
+<odoo>
+    <!-- Dummy model (you should replace this with actual stage logic) -->
+    <record id="action_open_stage_wizard" model="ir.actions.act_window">
+        <field name="name">Stages</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu Item under Purchase -->
+    <menuitem id="menu_purchase_stages"
+              name="Stages"
+              parent="purchase.menu_purchase_root"
+              action="action_open_stage_wizard"
+              sequence="50"
+              groups="purchase.group_purchase_user"/>
+</odoo>
